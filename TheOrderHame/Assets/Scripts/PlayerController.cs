@@ -8,9 +8,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private CharacterController playerBody;
     [SerializeField] private float sensitivity = 100f;
     [SerializeField] private bool puzzleEngaged = false;
+    [SerializeField] private PuzzlesManager puzzleManagerReference;
 
     // Update is called once per frame
     void Update()
+    {
+        Actions();
+    }
+
+    private void Actions()
     {
         if (!puzzleEngaged)
         {
@@ -23,11 +29,20 @@ public class PlayerController : MonoBehaviour
 
             playerBody.transform.Rotate(Vector3.up * horizontalMouseMovement);
         }
-        
+
     }
 
     public void ToogleEngagement()
     {
         puzzleEngaged = !puzzleEngaged;
+    }
+    public void ToogleEngagement(bool value)
+    {
+        puzzleEngaged = value;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {       
+        puzzleManagerReference.SendToPuzzle(other.gameObject);       
     }
 }

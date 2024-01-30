@@ -353,6 +353,8 @@
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/UnityEngine.UI.ref.dll"
 -analyzer:"C:/UnityFolder/2022.3.10f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"C:/UnityFolder/2022.3.10f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
+"Assets/Scripts/DragAndDrop.cs"
+"Assets/Scripts/PiecesFunctionality.cs"
 "Assets/Scripts/PlayerCameraMovemant.cs"
 "Assets/Scripts/PlayerController.cs"
 "Assets/Scripts/PuzzlesManager.cs"

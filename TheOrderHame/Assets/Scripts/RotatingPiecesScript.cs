@@ -14,12 +14,18 @@ public class RotatingPiecesScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SetUp();
+
+    }
+
+    private void SetUp()
+    {
         for (int index = 0; index < piecesList.Count; index++)
         {
             piecesList[index].GetComponent<MeshRenderer>().material = normalColor;
             piecesList[index].transform.Rotate(Vector3.forward, 90 * Random.Range(-3, 3));
         }
-
+        solved = false;
     }
 
     // Update is called once per frame
@@ -27,6 +33,7 @@ public class RotatingPiecesScript : MonoBehaviour
     {
         Actions();
     }
+    public bool Solved() => solved;
 
     private void Actions()
     {
@@ -34,6 +41,10 @@ public class RotatingPiecesScript : MonoBehaviour
         MovingThroughThePieces();
         RotatePieces();
         CheckIfSolved();
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SetUp();
+        }
     }
 
 
@@ -65,7 +76,7 @@ public class RotatingPiecesScript : MonoBehaviour
             if (solved)
             {
                 new WaitForSeconds(3);
-                puzzleManagerReference.SendCameraBackToBody();
+                puzzleManagerReference.SendCameraBackToBody(true);
             }
         }
         
@@ -73,10 +84,6 @@ public class RotatingPiecesScript : MonoBehaviour
 
     private void MovingThroughThePieces()
     {
-        for (int index = 0; index < piecesList.Count; index++)
-        {
-            Debug.Log((int)piecesList[index].transform.eulerAngles.z);
-        }
         if (Input.GetKeyDown(KeyCode.A) && selectedPiece > 0)
         {
             piecesList[selectedPiece].GetComponent<MeshRenderer>().material = normalColor;
@@ -97,6 +104,8 @@ public class RotatingPiecesScript : MonoBehaviour
             piecesList[selectedPiece].GetComponent<MeshRenderer>().material = normalColor;
             selectedPiece -= 3;
         }
+
+        //QuickSolve for puzzle -> debug and test purpose
         if (Input.GetKeyDown(KeyCode.M))
         {
             for (int index = 0; index < piecesList.Count; index++)
