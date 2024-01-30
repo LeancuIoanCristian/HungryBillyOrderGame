@@ -6,6 +6,7 @@ public class PlayerCameraMovemant : MonoBehaviour
 {
     [SerializeField] private float sensitivity = 100f;
     [SerializeField] private float xAxisRotation = 0f;
+    [SerializeField] private bool puzzleEngaged = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,9 +16,18 @@ public class PlayerCameraMovemant : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float verticalMouseMovement = Input.GetAxis("MouseY") * sensitivity * Time.deltaTime;
-        xAxisRotation -= verticalMouseMovement;
-        xAxisRotation = Mathf.Clamp(xAxisRotation, -90f, 75f);
-        transform.localRotation = Quaternion.Euler(xAxisRotation, 0.0f, 0.0f);
+        if (!puzzleEngaged)
+        {
+            float verticalMouseMovement = Input.GetAxis("MouseY") * sensitivity * Time.deltaTime;
+            xAxisRotation -= verticalMouseMovement;
+            xAxisRotation = Mathf.Clamp(xAxisRotation, -90f, 75f);
+            transform.localRotation = Quaternion.Euler(xAxisRotation, 0.0f, 0.0f);
+        }
+        
+    }
+
+    public void ToogleEngagement()
+    {
+        puzzleEngaged = !puzzleEngaged;
     }
 }
